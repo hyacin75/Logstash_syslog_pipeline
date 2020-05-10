@@ -4,6 +4,7 @@ Getting rsyslog working with ELK is easy - it's just very hard to find the instr
 
 In a multi-node setup on Ubuntu (and probably Debian - and maybe the same for a single node setup) drop the following in /etc/logstash/conf.d/ -
 
+```
 input {
   tcp {
     port => 5000
@@ -34,9 +35,7 @@ filter {
 output {
   elasticsearch { hosts => ["192.168.0.101:9200", "192.168.0.102:9200", "192.168.0.103:9200"] }
 }
-
-
-
+```
 You can use whatever port you'd like, and obviously update the Elasticsearch IP(s) to what is right for your setup.
 
 With this configuration my Logstash was able to accept and parse without error, rsyslog messages from my Ubuntu and Debian hosts, as well as my Asus router, Netgear switch, and Synology NAS.  It also assigns the correct facility and severity to the messages with this configuration.  I hope this saves someone else the days of searching and piecing together I had to do to get this working!!
